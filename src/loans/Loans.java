@@ -6,6 +6,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+import loans.Employee;
+import loans.Equipment;
+
 public class Loans implements Serializable {
 
 	private static final long serialVersionUID = 1L;

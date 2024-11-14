@@ -66,24 +66,31 @@ public class EmployeeFormController {
 	}
 
 	public void onButtonAddEmployeeAction(ActionEvent event) throws ParseException {
-		if (entity == null) {
-			throw new IllegalStateException("Entity was null");
-		}
-		if (service == null) {
-			throw new IllegalStateException("Service was null");
-		}
-		try {
-			entity = getFormData();
-			service.saveOrUpdate(entity);
-			notifyDataChangeListeners();
-			Alerts.showAlert(null, "O empregado " + entity.getName() + " foi salvo com sucesso", null,
-					AlertType.INFORMATION);
-			Utils.currentStage(event).close();
-		} catch (ValidationException e) {
-			setErrorMessages(e.getErrors());
-		} catch (DbException e) {
-			Alerts.showAlert("Error saving object", null, e.getMessage(), AlertType.ERROR);
-		}
+	    if (entity == null) {
+	        throw new IllegalStateException("Entity was null");
+	    }
+	    if (service == null) {
+	        throw new IllegalStateException("Service was null");
+	    }
+
+	    // Verifica se o funcionário já existe
+	    if (service.alreadyExists(employeeName.getText())) {
+	        Alerts.showAlert("Erro", null, "Funcionário já existente com o nome: " + employeeName.getText(), AlertType.ERROR);
+	        return; // Interrompe o processo de salvamento
+	    }
+
+	    try {
+	        entity = getFormData();
+	        service.saveOrUpdate(entity);
+	        notifyDataChangeListeners();
+	        Alerts.showAlert(null, "O empregado " + entity.getName() + " foi salvo com sucesso", null,
+	                AlertType.INFORMATION);
+	        Utils.currentStage(event).close();
+	    } catch (ValidationException e) {
+	        setErrorMessages(e.getErrors());
+	    } catch (DbException e) {
+	        Alerts.showAlert("Error saving object", null, e.getMessage(), AlertType.ERROR);
+	    }
 	}
 
 	private void notifyDataChangeListeners() {
@@ -143,6 +150,13 @@ public class EmployeeFormController {
 	    employeeName.setText(entity.getName());
 	    employeeRole.setText(entity.getRole());
 	    employeeHire.setText(entity.getAdmission() == null ? "" : sdf.format(entity.getAdmission()));
+	    if (entity.getId() != null) {
+	        employeeName.setDisable(true);
+	        employeeHire.setDisable(true);
+	    } else {
+	        employeeName.setDisable(false);
+	        employeeHire.setDisable(false);
+	    }
 	}
 
 	private void setErrorMessages(Map<String, String> errors) {

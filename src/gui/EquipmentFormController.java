@@ -90,7 +90,7 @@ public class EquipmentFormController implements Initializable {
 	private Equipment getFormData() throws ParseException {
 	    Equipment obj = new Equipment();
 	    ValidationException exception = new ValidationException("Validation error");
-
+	    
 	    Integer id = Utils.tryParseToInt(equipmentId.getText());
 	    if (id != null) {
 	        obj.setId(id);
@@ -122,7 +122,7 @@ public class EquipmentFormController implements Initializable {
 	    try {
 	        obj.setWeight(Double.parseDouble(equipmentWeight.getText()));
 	    } catch (NumberFormatException e) {
-	        exception.addError("weight", "Peso deve ser um número válido");
+	        exception.addError("weightValid", "Peso deve ser um número válido");
 	    }
 
 	    // Validação da largura
@@ -132,7 +132,7 @@ public class EquipmentFormController implements Initializable {
 	    try {
 	        obj.setWidth(Double.parseDouble(equipmentWidth.getText()));
 	    } catch (NumberFormatException e) {
-	        exception.addError("width", "Largura deve ser um número válido");
+	        exception.addError("widthValid", "Largura deve ser um número válido");
 	    }
 
 	    // Validação do comprimento
@@ -142,7 +142,7 @@ public class EquipmentFormController implements Initializable {
 	    try {
 	        obj.setLength(Double.parseDouble(equipmentLength.getText()));
 	    } catch (NumberFormatException e) {
-	        exception.addError("length", "Comprimento deve ser um número válido");
+	        exception.addError("lengthValid", "Comprimento deve ser um número válido");
 	    }
 
 	    // Validação do status de conservação
@@ -280,11 +280,20 @@ public class EquipmentFormController implements Initializable {
 		if (fields.contains("weight")) {
 			labelErrorWeight.setText(errors.get("weight"));
 		}
+		if (fields.contains("weightValid")) {
+			labelErrorWeight.setText(errors.get("weightValid"));
+		}
 		if (fields.contains("width")) {
 			labelErrorWidth.setText(errors.get("width"));
 		}
+		if (fields.contains("widthValid")) {
+			labelErrorWidth.setText(errors.get("widthValid"));
+		}
 		if (fields.contains("length")) {
 			labelErrorLength.setText(errors.get("length"));
+		}
+		if (fields.contains("lengthValid")) {
+			labelErrorLength.setText(errors.get("lengthValid"));
 		}
 		if (fields.contains("status")) {
 			labelErrorStatus.setText(errors.get("status"));

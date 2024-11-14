@@ -28,4 +28,7 @@ public class EmployeeService {
 		return dao.findById(id);
 		
 	}
+	public boolean alreadyExists(String name) {
+	    return dao.findAll().stream().anyMatch(employee -> employee.getName().equals(name));
+	}
 }
