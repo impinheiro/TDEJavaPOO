@@ -5,9 +5,11 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import application.Main;
+import db.DbIntegrityException;
 import gui.listeners.DataChangeListener;
 import gui.util.Alerts;
 import gui.util.Utils;
@@ -21,6 +23,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -29,10 +32,11 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import loans.Employee;
+import model.exceptions.EmployeeInLoanException;
 import models.services.EmployeeService;
 
 public class EmployeeListController implements Initializable, DataChangeListener {
-	
+
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	private Employee entity;
 
@@ -55,6 +59,9 @@ public class EmployeeListController implements Initializable, DataChangeListener
 
 	@FXML
 	private TableColumn<Employee, Employee> tableColumnEDIT;
+
+	@FXML
+	private TableColumn<Employee, Employee> tableColumnREMOVE;
 
 	@FXML
 	private Button btNewEmployee;
@@ -89,6 +96,7 @@ public class EmployeeListController implements Initializable, DataChangeListener
 		obsList = FXCollections.observableArrayList(list);
 		tableViewEmployee.setItems(obsList);
 		initEditButtons();
+		initRemoveButtons();
 	}
 
 	private void createDialogForm(Employee obj, String absoluteName, Stage parentStage) {
@@ -149,6 +157,37 @@ public class EmployeeListController implements Initializable, DataChangeListener
 				button.setOnAction(event -> createDialogForm(obj, "/gui/EmployeeForm.fxml", Utils.currentStage(event)));
 			}
 		});
+	}
+
+	private void initRemoveButtons() {
+		tableColumnREMOVE.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+		tableColumnREMOVE.setCellFactory(param -> new TableCell<Employee, Employee>() {
+			private final Button button = new Button("Remover");
+
+			@Override
+			protected void updateItem(Employee obj, boolean empty) {
+				super.updateItem(obj, empty);
+				if (obj == null) {
+					setGraphic(null);
+					return;
+				}
+				setGraphic(button);
+				button.setOnAction(event -> removeEntity(obj));
+			}
+		});
+	}
+	private void removeEntity(Employee obj) {
+	    Optional<ButtonType> result = Alerts.showConfirmation("Remoção de empregado", "Tem certeza que deseja excluir o empregado?");
+	    if(result.get() == ButtonType.OK) {
+	        try { 
+	            service.remove(obj); // Chama o serviço para remoção
+	            updateTableView(); // Atualiza a lista de empregados
+	        } catch (DbIntegrityException e) {
+	            Alerts.showAlert("Erro ao remover empregado", null, e.getMessage(), AlertType.ERROR);
+	        } catch (EmployeeInLoanException e) {
+	            Alerts.showAlert("Erro ao remover empregado", null, e.getMessage(), AlertType.ERROR);
+	        }
+	    }
 	}
 
 }

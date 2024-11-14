@@ -39,6 +39,7 @@
             <TableColumn fx:id="tableColumnHistory" minWidth="100.0" prefWidth="173.0" text="Histórico" />
             <TableColumn fx:id="tableColumnStatus" prefWidth="64.0" resizable="false" text="Estado" />
             <TableColumn fx:id="tableColumnEDIT" prefWidth="67.0" resizable="false" />
+            <TableColumn fx:id="tableColumnREMOVE" prefWidth="75.0" />
         </columns>
       </TableView>
    </children>
