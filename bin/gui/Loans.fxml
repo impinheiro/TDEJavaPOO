@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="521.0" prefWidth="777.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LoanListController">
+   <children>
+      <Label text="Empréstimos">
+         <padding>
+            <Insets left="5.0" top="5.0" />
+         </padding>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <ToolBar prefHeight="40.0" prefWidth="200.0">
+        <items>
+          <Button fx:id="btNewLoan" mnemonicParsing="false" onAction="#onBtNewLoanAction" text="Registrar empréstimo" />
+        </items>
+      </ToolBar>
+      <TableView fx:id="tableViewLoans" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+          <TableColumn fx:id="tableColumnId" prefWidth="38.0" text="ID" />
+          <TableColumn fx:id="tableColumnCheckout" prefWidth="109.0" text="Data de saída" />
+            <TableColumn fx:id="tableColumnReturn" prefWidth="138.0" text="Data de devolução" />
+            <TableColumn fx:id="tableColumnEmployeeName" minWidth="0.0" prefWidth="147.0" text="Empregado" />
+            <TableColumn fx:id="tableColumnEquipmentName" prefWidth="198.0" text="Equipamento" />
+            <TableColumn fx:id="tableColumnNotes" prefWidth="75.0" text="Obs" />
+            <TableColumn fx:id="tableColumnEDIT" prefWidth="75.0" />
+        </columns>
+      </TableView>
+   </children>
+</VBox>

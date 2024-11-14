@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="621.0" prefWidth="833.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.EquipmentListController">
+   <children>
+      <Label text="Equipamentos">
+         <padding>
+            <Insets left="5.0" top="5.0" />
+         </padding>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <ToolBar prefHeight="40.0" prefWidth="200.0">
+        <items>
+          <Button fx:id="btNewEquiment" mnemonicParsing="false" onAction="#onBtNewEquipmentAction" text="Novo equipamento" />
+        </items>
+      </ToolBar>
+      <TableView fx:id="tableViewEquipment" prefHeight="554.0" prefWidth="833.0">
+        <columns>
+          <TableColumn fx:id="tableColumnId" prefWidth="22.0" resizable="false" text="ID" />
+          <TableColumn fx:id="tableColumnName" prefWidth="100.0" resizable="false" text="Equipamento" />
+            <TableColumn fx:id="tableColumnPurchaseDate" prefWidth="103.0" resizable="false" text="Data de compra" />
+            <TableColumn fx:id="tableColumnWeight" prefWidth="45.0" resizable="false" text="Peso" />
+            <TableColumn fx:id="tableColumnWidth" prefWidth="59.0" resizable="false" text="Largura" />
+            <TableColumn fx:id="tableColumnLength" prefWidth="89.0" resizable="false" text="Comprimento" />
+            <TableColumn fx:id="tableColumnHistory" minWidth="100.0" prefWidth="173.0" text="Histórico" />
+            <TableColumn fx:id="tableColumnStatus" prefWidth="64.0" resizable="false" text="Estado" />
+            <TableColumn fx:id="tableColumnEDIT" prefWidth="67.0" resizable="false" />
+        </columns>
+      </TableView>
+   </children>
+</VBox>
