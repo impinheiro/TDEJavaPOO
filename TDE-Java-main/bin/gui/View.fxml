@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ViewController">
+   <content>
+      <VBox prefHeight="303.0" prefWidth="519.0">
+         <children>
+            <MenuBar prefHeight="50.0" prefWidth="213.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="Registro">
+                  <items>
+                    <MenuItem fx:id="menuItemRegisterEmployee" mnemonicParsing="false" onAction="#onMenuItemRegisterEmployee" text="Funcionário" />
+                        <MenuItem fx:id="menuItemRegisterEquipment" mnemonicParsing="false" onAction="#onMenuItemRegisterEquipment" text="Equipamento" />
+                        <MenuItem fx:id="menuItemRegisterLoan" mnemonicParsing="false" onAction="#onMenuItemRegisterLoan" text="Empréstimo" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Sobre">
+                  <items>
+                    <MenuItem fx:id="menuItemAbout" mnemonicParsing="false" onAction="#onMenuItemAbout" text="Ver sobre programa" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <Label text="TrackBug Co. Sistema de empréstimos" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold Italic" size="24.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="40.0" top="100.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
+   </content>
+</ScrollPane>
